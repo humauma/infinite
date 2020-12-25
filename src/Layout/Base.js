@@ -5,9 +5,10 @@ import Sidebar from './Sidebar'
 import Footer from './Footer'
 import Recipes from '../Components/Recipes'
 import LayoutStyles from './LayoutStyle'
+import { Route } from 'react-router-dom';
 
 //Halaman base untuk layout
-const Base = () => {
+const Base = ({ match }) => {
     const classes = LayoutStyles();
     const [open, setOpen] = useState(true);
     const toggleDrawer = () => {
@@ -21,7 +22,7 @@ const Base = () => {
             <Sidebar toggleDrawer={toggleDrawer} open={open} />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Recipes />
+                <Route path={`${match.url}/recipes`} component={Recipes} />
                 <Footer />
             </main>
         </div>
