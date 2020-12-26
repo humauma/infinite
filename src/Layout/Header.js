@@ -73,7 +73,7 @@ const Header = ({ open, toggleDrawer }) => {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            Header
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
