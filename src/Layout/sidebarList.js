@@ -8,6 +8,7 @@ import InputIcon from '@material-ui/icons/Input';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+//Material UI's ListItemLink
 function ListItemLink(props) {
   const { icon, primary, to } = props;
 
