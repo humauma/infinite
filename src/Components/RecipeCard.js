@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import ModalDetail from './ModalDetail'
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -22,28 +23,32 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const RecipeCard = ({ card }) => {
+const RecipeCard = ({ meal }) => {
+    const [open, setOpen] = React.useState(false);
     const classes = useStyles();
+    const toggleModal = () => {
+        setOpen(!open);
+    }
     return (
         <>
-            <Grid item key={card.id} xs={12} sm={6} md={4}>
+            <ModalDetail toggle={toggleModal} open={open} meal={meal} />
+            <Grid item key={meal.idMeal} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                     <CardMedia
                         className={classes.cardMedia}
-                        image="https://source.unsplash.com/random"
-                        title={card.tittle}
+                        image={meal.strMealThumb}
+                        title={meal.strMeal}
                     />
                     <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h5" component="h2">
-                            {card.tittle}
+                            {meal.strMeal}
                         </Typography>
-                        <Typography>
-                            {card.content}
+                        <Typography component="h6">
+                            {meal.strArea}
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small">View</Button>
-                        <Button size="small">Edit</Button>
+                        <Button size="small" onClick={() => setOpen(true)}>View</Button>
                     </CardActions>
                 </Card>
             </Grid>

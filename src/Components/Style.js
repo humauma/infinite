@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(8, 0, 6),
     },
     heroButtons: {
-        marginTop: theme.spacing(4),
+        marginTop: theme.spacing(1),
     },
     cardGrid: {
         paddingTop: theme.spacing(8),
@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     cardContent: {
         flexGrow: 1,
     },
+    formControl: {
+        margin: theme.spacing(5,16,1),
+        minWidth: 300,
+      },
 }));
 
 export default useStyles

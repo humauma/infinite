@@ -4,7 +4,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ReceiptIcon from '@material-ui/icons/Receipt';
-import InputIcon from '@material-ui/icons/Input';
+import PublicIcon from '@material-ui/icons/Public';
+import ClassIcon from '@material-ui/icons/Class';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -37,7 +38,8 @@ export const mainList = (
   <div>
     <List aria-label="main mailbox folders">
       <ListItemLink to="recipes" primary="Recipes" icon={<ReceiptIcon />} />
-      <ListItemLink to="rother" primary="Customize" icon={<InputIcon />} />
+      <ListItemLink to="bycountry" primary="By Country" icon={<PublicIcon />} />
+      <ListItemLink to="bycategory" primary="By Category" icon={<ClassIcon />} />
     </List>
   </div>
 );

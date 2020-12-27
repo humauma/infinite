@@ -5,18 +5,25 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import RecipeCard from './RecipeCard'
 import useStyles from './Style'
-
-const cards = [
-  { id: 1, tittle: "Soto", content: "Sample text, bebas diisi apa saja yang baik-baik sesuka hati anda" },
-  { id: 2, tittle: "Bakso", content: "Sample text, bebas diisi apa saja yang baik-baik sesuka hati anda" },
-  { id: 3, tittle: "Sate", content: "Sample text, bebas diisi apa saja yang baik-baik sesuka hati anda" },
-  { id: 4, tittle: "Rendang", content: "Sample text, bebas diisi apa saja yang baik-baik sesuka hati anda" },
-  { id: 5, tittle: "Sop Ayam", content: "Sample text, bebas diisi apa saja yang baik-baik sesuka hati anda" },
-  { id: 6, tittle: "Sayur Bayam", content: "Sample text, bebas diisi apa saja yang baik-baik sesuka hati anda" },
-];
+import axios from 'axios'
 
 export default function Recipes() {
+  const [meals, setMeals] = React.useState([]);
   const classes = useStyles();
+
+  //Open api using https://www.themealdb.com/api.php
+  React.useEffect(() => {
+    axios.get("https://www.themealdb.com/api/json/v1/1/search.php?f=s")
+      .then(response => {
+        setMeals(response.data.meals);
+        console.log(response.data.meals);
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }, []);
+
+
 
   return (
     <React.Fragment>
@@ -44,8 +51,8 @@ export default function Recipes() {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <RecipeCard key={card.id} card={card} />
+            {meals.map((meal) => (
+              <RecipeCard key={meal.idMeal} meal={meal} />
             ))}
           </Grid>
         </Container>
