@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const ComponentStyles = makeStyles((theme) => ({
     icon: {
         marginRight: theme.spacing(2),
     },
@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     formControl: {
-        margin: theme.spacing(5,16,1),
+        margin: theme.spacing(5, 16, 1),
         minWidth: 300,
-      },
+    },
 }));
 
-export default useStyles
+export { ComponentStyles }

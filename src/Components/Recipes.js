@@ -4,12 +4,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import RecipeCard from './RecipeCard'
-import useStyles from './Style'
+import { ComponentStyles } from './Style' //harus di import terakhir setelah komponen2 lain
 import axios from 'axios'
 
 export default function Recipes() {
   const [meals, setMeals] = React.useState([]);
-  const classes = useStyles();
+  const classes = ComponentStyles();
 
   //Open api using https://www.themealdb.com/api.php
   React.useEffect(() => {
@@ -22,8 +22,6 @@ export default function Recipes() {
         console.error(error)
       })
   }, []);
-
-
 
   return (
     <React.Fragment>
@@ -52,7 +50,7 @@ export default function Recipes() {
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
             {meals.map((meal) => (
-              <RecipeCard key={meal.idMeal} meal={meal} />
+              <RecipeCard key={meal.idMeal} meal={meal} full={true} />
             ))}
           </Grid>
         </Container>

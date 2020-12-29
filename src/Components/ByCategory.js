@@ -13,15 +13,15 @@ import axios from 'axios'
 export default function ByCountry() {
     const classes = ComponentStyles();
     const [meals, setMeals] = React.useState([]);
-    const [countryList, setCountryList] = React.useState([]);
-    const [country, setCountry] = React.useState('');
+    const [categoryList, setCategoryList] = React.useState([]);
+    const [category, setCategory] = React.useState('');
     const [cek, setCek] = React.useState(false);
 
     //Open api using https://www.themealdb.com/api.php
     React.useEffect(() => {
-        axios.get("https://www.themealdb.com/api/json/v1/1/list.php?a=list")
+        axios.get("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
             .then(response => {
-                setCountryList(response.data.meals);
+                setCategoryList(response.data.meals);
                 console.log(response.data.meals);
             })
             .catch((error) => {
@@ -30,8 +30,8 @@ export default function ByCountry() {
     }, []);
 
     React.useEffect(() => {
-        const updateData = (country) => {
-            axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?a=" + country)
+        const updateData = (category) => {
+            axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category)
                 .then(response => {
                     setMeals(response.data.meals);
                     console.log(response.data.meals);
@@ -42,14 +42,14 @@ export default function ByCountry() {
             setCek(false)
         }
         if (cek) {
-            updateData(country);
+            updateData(category);
         }
     }, [cek]);
 
 
 
     const handleChange = (event) => {
-        setCountry(event.target.value);
+        setCategory(event.target.value);
         setCek(true)
     };
 
@@ -69,19 +69,19 @@ export default function ByCountry() {
                             Recipes
                         </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            Choose recipes by it's origin
+                            Choose recipes by it's category
                         </Typography>
                         <div className={classes.heroButtons}>
                             <FormControl className={classes.formControl}>
-                                <InputLabel >Country</InputLabel>
+                                <InputLabel >Category</InputLabel>
                                 <Select
                                     native
-                                    value={country}
+                                    value={category}
                                     onChange={handleChange}
                                 >
                                     <option aria-label="None" value="" />
-                                    {countryList.map((countries) => (
-                                        <option key={countries.strArea} value={countries.strArea}>{countries.strArea}</option>
+                                    {categoryList.map((categories) => (
+                                        <option key={categories.strCategory} value={categories.strCategory}>{categories.strCategory}</option>
                                     ))}
                                 </Select>
                             </FormControl>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from '@material-ui/core/Link';
-import LayoutStyles from './LayoutStyle'
 import Typography from '@material-ui/core/Typography';
+import { LayoutStyles } from './LayoutStyle.js'
 
 function Copyright() {
     return (

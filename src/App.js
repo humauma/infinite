@@ -2,7 +2,7 @@ import { Route, Redirect } from 'react-router-dom';
 import React, { Suspense, lazy, Fragment } from 'react';
 import Loader from 'react-loader'
 
-const Main = lazy(() => import('../src/Layout/Base'));
+const Main = lazy(() => import('../src/Layout/index'));
 
 function App() {
   return (

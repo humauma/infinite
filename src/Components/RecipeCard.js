@@ -6,8 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import ModalDetail from './ModalDetail';
 import { makeStyles } from '@material-ui/core/styles';
-import ModalDetail from './ModalDetail'
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const RecipeCard = ({ meal }) => {
+const RecipeCard = ({ meal, full }) => {
     const [open, setOpen] = React.useState(false);
     const classes = useStyles();
     const toggleModal = () => {
@@ -31,7 +31,7 @@ const RecipeCard = ({ meal }) => {
     }
     return (
         <>
-            <ModalDetail toggle={toggleModal} open={open} meal={meal} />
+            <ModalDetail toggle={toggleModal} open={open} meal={meal} full={full} />
             <Grid item key={meal.idMeal} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                     <CardMedia

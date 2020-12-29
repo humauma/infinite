@@ -67,7 +67,7 @@ const DialogActions = withStyles((theme) => ({
     },
 }))(MuiDialogActions);
 
-const ModalDetail = ({ open, toggle, meal }) => {
+const ModalDetail = ({ open, toggle, meal, full }) => {
     const classes = useStyles();
     return (
         <div>
@@ -83,8 +83,16 @@ const ModalDetail = ({ open, toggle, meal }) => {
                             title={meal.strMeal}
                         />
                         <CardContent className={classes.cardContent}>
-                            <Typography variant="h5" component="h2">Instructions</Typography>
-                            <Typography>{meal.strInstructions}</Typography>
+                            {full ?
+                                (<div style={{ height: '100%', width: '500px' }}>
+                                    <Typography variant="h5" component="h2">Instructions</Typography>
+                                    <Typography>{meal.strInstructions}</Typography>
+                                </div>)
+                                :
+                                (<div style={{ height: '100%', width: '500px' }}>
+                                    <Typography>No Instruction Available</Typography>
+                                </div>)
+                            }
                         </CardContent>
                     </Card>
                 </DialogContent>
