@@ -7,51 +7,60 @@ import RecipeCard from './RecipeCard'
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { ComponentStyles } from './Style'
-import axios from 'axios'
+import { ComponentStyles } from './Style';
+//import axios from 'axios'
+import {categoryActions} from '../Redux/actions';
+import propTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-export default function ByCountry() {
+function ByCountry({meals, getCek, loading, category, onChange,categoryList, getList }) {
+    console.log('cat:',category)
+    console.log('list', categoryList)
+    console.log('meal:', meals)
     const classes = ComponentStyles();
-    const [meals, setMeals] = React.useState([]);
-    const [categoryList, setCategoryList] = React.useState([]);
-    const [category, setCategory] = React.useState('');
-    const [cek, setCek] = React.useState(false);
 
-    //Open api using https://www.themealdb.com/api.php
-    React.useEffect(() => {
-        axios.get("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
-            .then(response => {
-                setCategoryList(response.data.meals);
-                console.log(response.data.meals);
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }, []);
+    
+    // React.useEffect(() => {
+    //     axios.get("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
+    //         .then(response => {
+    //             setCategoryList(response.data.meals);
+    //             console.log(response.data.meals);
+    //         })
+    //         .catch((error) => {
+    //             console.error(error)
+    //         })
+    // }, []);
 
-    React.useEffect(() => {
-        const updateData = (category) => {
-            axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category)
-                .then(response => {
-                    setMeals(response.data.meals);
-                    console.log(response.data.meals);
-                })
-                .catch((error) => {
-                    console.error(error)
-                })
-            setCek(false)
-        }
-        if (cek) {
-            updateData(category);
-        }
-    }, [cek]);
+    // React.useEffect(() => {
+    //     const updateData = (category) => {
+    //         axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category)
+    //             .then(response => {
+    //                 setMeals(response.data.meals);
+    //                 console.log(response.data.meals);
+    //             })
+    //             .catch((error) => {
+    //                 console.error(error)
+    //             })
+    //         setCek(false)
+    //     }
+    //     if (cek) {
+    //         updateData(category);
+    //     }
+    // }, [cek]);
 
 
 
-    const handleChange = (event) => {
-        setCategory(event.target.value);
-        setCek(true)
-    };
+    // const handleChange = (event) => {
+    //     setCategory(event.target.value);
+    //     setCek(true)
+    // };
+React.useEffect(()=>{
+    if (loading) {
+        getCek()
+        getList()
+  }
+    }, [loading]
+)
 
     return (
         <React.Fragment>
@@ -77,7 +86,7 @@ export default function ByCountry() {
                                 <Select
                                     native
                                     value={category}
-                                    onChange={handleChange}
+                                    onChange={(e) => onChange(e.target.value)}
                                 >
                                     <option aria-label="None" value="" />
                                     {categoryList.map((categories) => (
@@ -101,3 +110,25 @@ export default function ByCountry() {
         </React.Fragment>
     );
 }
+
+const mapStateToProps = state => ({
+    ...state.catReducer
+})
+
+const mapDisppatchToProps = {
+    getCek: categoryActions.getCategory,
+    onChange: categoryActions.onChange,
+    getList: categoryActions.getList
+    
+}
+
+ByCountry.propTypes = {
+    meals: propTypes.object,
+    dataStates: propTypes.object,
+    loading: propTypes.bool,
+    getList: propTypes.func,
+    getCek: propTypes.func,
+    onChange:propTypes.func
+}
+
+export default connect(mapStateToProps, mapDisppatchToProps)(ByCountry)

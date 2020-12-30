@@ -5,11 +5,12 @@ import Sidebar from './Sidebar'
 import Footer from './Footer'
 import Container from '@material-ui/core/Container';
 import { Route } from 'react-router-dom';
-import Recipes from '../Components/Recipes'
+//import Recipes from '../Components/Recipes'
+import Recipes from '../Components/RecipesRdx'
 import ByCountry from '../Components/ByCountry'
 import ByCategory from '../Components/ByCategory'
 import { LayoutStyles } from './LayoutStyle.js' //harus id import terakhir untuk override style
-import { ComponentStyles } from '../Components/Style'
+//import { ComponentStyles } from '../Components/Style'
 
 //Halaman base untuk layout
 const Base = ({ match }) => {
